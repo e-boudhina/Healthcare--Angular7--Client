@@ -1,0 +1,150 @@
+<body>
+<div class="container">
+  <h1 >Patient Registration </h1>
+
+
+  <form (ngSubmit)="paf.valid && onSubmit()" #paf="ngForm" novalidate >
+    <div class="row">
+
+      <div class="col">
+        <div class="form-group">
+          <input  required  minlength="4" maxlength="15" [(ngModel)]="model.firstname" name="firstname" #firstname="ngModel" [ngClass]="{'is-invalid':paf.submitted && firstname.invalid ,'is-valid':paf.submitted && firstname.valid}" type="text" class="form-control" placeholder="First name" >
+          <div class="invalid-feedback">
+            <div>First Name is required !</div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <input  required  minlength="4" maxlength="15" [(ngModel)]="model.lastname" name="lastname" #lastname="ngModel" [ngClass]="{'is-invalid':paf.submitted && lastname.invalid,'is-valid':paf.submitted && lastname.valid}" type="text" class="form-control" placeholder="Last name" >
+          <div class="invalid-feedback">
+            <div >Last name is required !</div>
+
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="col">
+
+        <div class="input-group-prepend">
+          <div class="input-group-text">+216</div>
+          <div class="form-group">
+            <input required minlength="4" type="text" class="form-control" [(ngModel)]="model.phonenumber" #phonenumber="ngModel" [ngClass]="{'is-invalid':paf.submitted && phonenumber.invalid,'is-valid':paf.submitted && phonenumber.valid}" name="phonenumber" placeholder="Phone Number">
+
+            <div *ngIf="paf.submitted && phonenumber.invalid" class="invalid-feedback" >
+              <div *ngIf="phonenumber.errors.required">this field is required !</div>
+              <div *ngIf="phonenumber.errors.minlength">Phone number can not be less then 4 digits !</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <input required placeholder="Birth Date" class="form-control" [(ngModel)]="model.birth_date" #birth_date="ngModel" [ngClass]="{'is-invalid':paf.submitted && birth_date.invalid, 'is-valid':paf.submitted && birth_date.valid}" name="birth_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+          <div class="invalid-feedback">
+            <div >Birth-date is required !</div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <input required minlength="8" type="text" class="form-control" [(ngModel)]="model.adress" #adress="ngModel" [ngClass]="{'is-invalid':paf.submitted && adress.invalid,'is-valid':paf.submitted && adress.valid}" name="adress" placeholder="Address">
+          <div class="invalid-feedback">
+            <div >adress is required !</div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <input required email type="text" class="form-control" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{'is-invalid':paf.submitted && email.invalid,'is-valid':paf.submitted && email.valid}" name="email" placeholder="E-mail">
+          <!-- if you remove *ngIf="paf.submitted && email.invalid" validation error would not work -->
+          <div *ngIf="paf.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">Email is required !</div>
+              <div *ngIf="email.errors.email">You must be a valid email adress !</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <input required type="text" class="form-control" [(ngModel)]="model.company_name" #company_name="ngModel" [ngClass]="{'is-invalid':paf.submitted && company_name.invalid, 'is-valid':paf.submitted && company_name.valid}" name="company_name" placeholder="Insurance company name">
+          <div class="invalid-feedback">
+            <div >Insurance company name  is required !</div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <input required type="number" class="form-control" [(ngModel)]="model.policy_number" #policy_number="ngModel" [ngClass]="{'is-invalid':paf.submitted && policy_number.invalid,'is-valid':paf.submitted && policy_number.valid}" name="policy_number" placeholder="Insurance policy Number">
+          <div class="invalid-feedback">
+            <div >Insurance policy number is required !</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <div class="form-group">
+          <input required type="text" class="form-control" [(ngModel)]="model.username" #username="ngModel" [ngClass]="{'is-invalid':paf.submitted && username.invalid ,'is-valid':paf.submitted && username.valid}" name="username" placeholder="Username">
+          <div  class="invalid-feedback">
+            <div >You must shoose a valid username !</div>
+            <div class="valid-feedback"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="col-3">
+        <div class="form-group">
+          <button required type="button" class="btn btn-outline-dark">Check availability</button>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <input required minlength="7" type="password" class="form-control" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{'is-invalid':paf.submitted && password.invalid ,'is-valid':paf.submitted && password.valid}" name="password" placeholder="password">
+          <div *ngIf="paf.submitted && password.invalid" class="invalid-feedback" >
+            <div *ngIf="password.errors.required">this field is required !</div>
+            <div *ngIf="password.errors.minlength">Password must be at least 7 caracters !</div>
+          </div>
+
+          <div class="valid-feedback">
+            <div>Do not share your password with any one !</div>
+          </div>
+      </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+      <div class="col">
+
+        <button style="width: 100%;" type="submit" class="btn btn-dark">Register</button>
+      <!--
+        <div class="alert alert-success" *ngIf="paf.submitted && paf.valid">
+          You have been registered
+        </div>
+        -->
+      </div>
+
+    </div>
+{{model | json}}
+  </form>
+</div>
+</body>
