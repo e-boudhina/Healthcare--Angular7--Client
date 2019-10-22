@@ -18,7 +18,7 @@
               <li class="nav-item">
               <i class="fas fa-user" ></i>
               <input ngModel type="text" name="username"  id="username" #username="ngModel" class="form-control form-control-sm" placeholder="Username" required>
-                <div class="alert alert-danger" *ngIf="!username.valid && username.touched">Username is required !</div>
+
               </li>
             </div>
 
@@ -26,7 +26,7 @@
               <li class="nav-item">
               <i class="fas fa-lock"></i>
               <input ngModel type="password" name="userpw" id="userpw" #userpw="ngModel" class="form-control form-control-sm" placeholder="Password" required>
-                <div class="alert alert-danger" *ngIf="!userpw.valid && userpw.touched">Userpassword is required !</div>
+
               </li>
             </div>
             <div class="form-group">
@@ -45,7 +45,7 @@
         <li class="nav-item">
 
           <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle" routerLink="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Register As
             </a>
 

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InsuranceCompanyComponent implements OnInit {
 
+  model = {}
   constructor() { }
 
   ngOnInit() {

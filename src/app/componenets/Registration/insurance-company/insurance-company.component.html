@@ -3,12 +3,16 @@
   <h1 > Insurance Company Registration </h1>
 
 
-  <form method="POST" action="">
+  <form #inc_f="ngForm" novalidate >
 
     <div class="row">
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Full company name" required>
+          <input minlength="8" [(ngModel)]="model.company_full_name" name="companyfullname" #companyfullname="ngModel" type="text" [ngClass]="{'is-invalid':inc_f.submitted && companyfullname.invalid ,'is-valid':inc_f.submitted && companyfullname.valid }" class="form-control" placeholder="Full company name" required>
+          <div class="invalid-feedback">
+            <div *ngIf="companyfullname.errors.required">this field is required</div>
+            <div *ngIf="companyfullname.errors.minlength">fullname must contain at least 8 caracters!</div>
+          </div>
         </div>
       </div>
 
@@ -16,7 +20,13 @@
         <div class="input-group-prepend">
           <div class="input-group-text">+216</div>
           <div class="form-group">
-          <input type="number" class="form-control"  placeholder="Phone Number">
+          <input minlength="4" [(ngModel)]="model.company_number" name="companyphonenumber" #companynumber="ngModel" type="text" [ngClass]="{'is-invalid':inc_f.submitted && companynumber.invalid,'is-valid':inc_f.submitted && companynumber.valid }"class="form-control"  placeholder="Phone Number" required>
+
+            <div *ngIf="inc_f.submitted && companynumber.invalid" class="invalid-feedback" >
+              <div *ngIf="companynumber.errors.required">this field is required !</div>
+              <div *ngIf="companynumber.errors.minlength">Phone number can not be less then 4 digits !</div>
+            </div>
+
           </div>
         </div>
 
@@ -24,7 +34,10 @@
       </div>
       <div class="col">
         <div class="form-group">
-        <input placeholder="Creation Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+        <input [(ngModel)]="model.company_creation_date" name="companycreationdate" #creationdate="ngModel" [ngClass]="{'is-invalid':inc_f.submitted && creationdate.invalid,'is_invalid':inc_f.submitted &&creationdate.valid}" placeholder="Creation Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+        <div class="invalid-feedback">
+          <div>this field is required</div>
+        </div>
         </div>
       </div>
 
@@ -35,12 +48,21 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Location">
+        <input minlength="8" required [(ngModel)]="model.location" name="location" #location="ngModel" [ngClass]="{'is-invalid':inc_f.submitted && location.invalid,'is-valid':inc_f.submitted&&location.valid}" type="text" class="form-control" placeholder="Location">
+          <div *ngIf="inc_f.submitted && location.invalid" class="invalid-feedback" >
+            <div *ngIf="location.errors.required">this field is required !</div>
+            <div *ngIf="location.errors.minlength">Location must contain at least 8 caracters!</div>
+          </div>
         </div>
       </div>
       <div class="col">
         <div class="form-group">
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="E-mail">
+          <input required email type="text" class="form-control" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{'is-invalid':inc_f.submitted && email.invalid,'is-valid':inc_f.submitted && email.valid}" name="email" placeholder="E-mail">
+          <!-- if you remove *ngIf="paf.submitted && email.invalid" validation error would not work -->
+          <div *ngIf="inc_f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is required !</div>
+            <div *ngIf="email.errors.email">You must be a valid email adress !</div>
+          </div>
         </div>
       </div>
 
@@ -48,12 +70,19 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Insurance company identification code">
+        <input minlength="4" type="text" required [(ngModel)]="model.company_code" #code="ngModel" [ngClass]="{'is-invalid':inc_f.submitted&&code.invalid,'is-valid':inc_f.submitted&&code.valid}" name="companycode" class="form-control" placeholder="Insurance company identification code">
+          <div *ngIf="inc_f.submitted && code.invalid" class="invalid-feedback">
+          <div *ngIf="code.errors.required">Email is required !</div>
+          <div *ngIf="code.errors.minlength">Company code must include no less then 4 digits !</div>
+        </div>
         </div>
       </div>
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Company website">
+        <input required name="website" [(ngModel)]="model.website" #website="ngModel" [ngClass]="{'is-invalid':inc_f.submitted&&website.invalid,'is-valid':inc_f.submitted&&website.valid}"  type="text" class="form-control" placeholder="Company website">
+        <div class="invalid-feedback">
+          <div>this field is required</div>
+        </div>
         </div>
 
       </div>
@@ -61,7 +90,11 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Company name">
+        <input required minlength="2" #company_name="ngModel" name="companyname" [(ngModel)]="model.company_name" [ngClass]="{'is-invalid':inc_f.submitted&&company_name.invalid,'is-valid':inc_f.submitted&&company_name.valid}" type="text" class="form-control" placeholder="Company name">
+          <div *ngIf="inc_f.submitted && company_name.invalid" class="invalid-feedback">
+          <div *ngIf="company_name.errors.required">this field is required !</div>
+          <div *ngIf="company_name.errors.minlength">Company code must include no less then 2 caracters !</div>
+        </div>
         </div>
 
       </div>
@@ -83,7 +116,8 @@
       </div>
 
     </div>
-
+    {{ model |json}}
   </form>
+
 </div>
 </body>

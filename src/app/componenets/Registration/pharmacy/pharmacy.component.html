@@ -3,20 +3,37 @@
   <h1 > Pharmacy Registration </h1>
 
 
-  <form method="POST" action="">
+  <form (ngSubmit)="ph_f.valid && onSubmit()" #ph_f="ngForm" novalidate>
 
     <div class="row">
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Owner full name" required>
+
+          <input minlength="8" [(ngModel)]="model.owerfullname" name="ownerfullname" #owner="ngModel" type="text" [ngClass]="{'is-invalid':ph_f.submitted && owner.invalid ,'is-valid':ph_f.submitted && owner.valid }" class="form-control" placeholder="Full owner name" required>
+          <div class="invalid-feedback">
+            <div *ngIf="owner.errors.required">this field is required</div>
+            <div *ngIf="owner.errors.minlength">ownerfullname must contain at least 8 caracters!</div>
+          </div>
         </div>
+
+
+
+
+
+
+
       </div>
 
       <div class="col">
         <div class="input-group-prepend">
           <div class="input-group-text">+216</div>
           <div class="form-group">
-          <input type="number" class="form-control"  placeholder="Phone Number">
+            <input required minlength="4" type="text" class="form-control" [(ngModel)]="model.phonenumber" #phonenumber="ngModel" [ngClass]="{'is-invalid':ph_f.submitted && phonenumber.invalid,'is-valid':ph_f.submitted && phonenumber.valid}" name="phonenumber" placeholder="Phone Number">
+
+            <div *ngIf="ph_f.submitted && phonenumber.invalid" class="invalid-feedback" >
+              <div *ngIf="phonenumber.errors.required">this field is required !</div>
+              <div *ngIf="phonenumber.errors.minlength">Phone number can not be less then 4 digits !</div>
+            </div>
           </div>
         </div>
 
@@ -24,7 +41,10 @@
       </div>
       <div class="col">
         <div class="form-group">
-        <input placeholder="Creation Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+          <input [(ngModel)]="model.company_creation_date" name="companycreationdate" #creationdate="ngModel" [ngClass]="{'is-invalid':ph_f.submitted && creationdate.invalid,'is_invalid':ph_f.submitted &&creationdate.valid}" placeholder="Creation Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+          <div class="invalid-feedback">
+            <div>this field is required</div>
+          </div>
         </div>
       </div>
 
@@ -35,45 +55,57 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Location">
+          <input minlength="8" required [(ngModel)]="model.location" name="location" #location="ngModel" [ngClass]="{'is-invalid':ph_f.submitted && location.invalid,'is-valid':ph_f.submitted&&location.valid}" type="text" class="form-control" placeholder="Location">
+          <div *ngIf="ph_f.submitted && location.invalid" class="invalid-feedback" >
+            <div *ngIf="location.errors.required">this field is required !</div>
+            <div *ngIf="location.errors.minlength">Location must contain at least 8 caracters!</div>
+          </div>
         </div>
       </div>
       <div class="col">
         <div class="form-group">
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="E-mail">
+          <input required email type="text" class="form-control" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{'is-invalid':ph_f.submitted && email.invalid,'is-valid':ph_f.submitted && email.valid}" name="email" placeholder="E-mail">
+
+          <div *ngIf="ph_f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is required !</div>
+            <div *ngIf="email.errors.email">You must be a valid email adress !</div>
+          </div>
         </div>
       </div>
 
     </div>
     <div class="row">
+
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Insurance company name">
+          <input required minlength="6" #pharmacyname="ngModel" name="pharmacyname" [(ngModel)]="model.pharmacy_name" [ngClass]="{'is-invalid':ph_f.submitted&&pharmacyname.invalid,'is-valid':ph_f.submitted&&pharmacyname.valid}" type="text" class="form-control" placeholder="Pharmacy name">
+          <div *ngIf="ph_f.submitted && pharmacyname.invalid" class="invalid-feedback">
+            <div *ngIf="pharmacyname.errors.required">this field is required !</div>
+            <div *ngIf="pharmacyname.errors.minlength">Company code must include no less then 6 caracters !</div>
+          </div>
         </div>
+
       </div>
       <div class="col">
         <div class="form-group">
-        <input type="number" class="form-control" placeholder="Insurance policy Number">
+          <button type="button" class="btn btn-outline-dark">Check availability</button>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <input required minlength="7" type="password" class="form-control" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{'is-invalid':ph_f.submitted && password.invalid ,'is-valid':ph_f.submitted && password.valid}" name="password" placeholder="Password">
+          <div *ngIf="ph_f.submitted && password.invalid" class="invalid-feedback" >
+            <div *ngIf="password.errors.required">this field is required !</div>
+            <div *ngIf="password.errors.minlength">Password must be at least 7 caracters !</div>
+          </div>
+          <div class="valid-feedback">
+            <div>Do not share your password with any one !</div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="form-group">
-        <input type="text" class="form-control" placeholder="Pharmacy Name">
-        </div>
 
-      </div>
-      <div class="col">
-        <div class="form-group">
-        <button type="button" class="btn btn-outline-dark">Check availability</button>
-        </div>
-      </div>
-      <div class="col">   </div>
-      <div class="col">    </div>
-
-
-    </div>
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -82,7 +114,7 @@
       </div>
 
     </div>
-
+    {{model | json}}
   </form>
 </div>
 </body>

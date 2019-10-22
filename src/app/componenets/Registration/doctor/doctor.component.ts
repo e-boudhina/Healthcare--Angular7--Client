@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doctor.component.css']
 })
 export class DoctorComponent implements OnInit {
+  model = {};
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    return false;
+  }
 }

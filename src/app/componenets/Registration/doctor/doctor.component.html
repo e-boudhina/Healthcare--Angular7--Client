@@ -3,24 +3,36 @@
   <h1 >Doctor Registration </h1>
 
 
-  <form method="POST" action="">
-
+  <form (ngSubmit)="do_f.valid && onSubmit()" #do_f="ngForm" novalidate >
     <div class="row">
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="First name" required>
+        <input minlength="4" type="text" name="firstname" #firstname="ngModel" [(ngModel)]="model.firstname" [ngClass]="{'is-invalid':do_f.submitted&&firstname.invalid,'is-valid':do_f.submitted&&firstname.valid}" class="form-control" placeholder="First name" required>
+        <div *ngIf="do_f.submitted&&firstname.invalid" class="invalid-feedback">
+          <div *ngIf="firstname.errors.required"> this field is required</div>
+          <div *ngIf="firstname.errors.minlength">firstname can not be less then 4 caracters</div>
+        </div>
         </div>
       </div>
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Last name" required>
+          <input minlength="4" type="text" name="lastname" #lastname="ngModel" [(ngModel)]="model.lastname" [ngClass]="{'is-invalid':do_f.submitted&&lastname.invalid,'is-valid':do_f.submitted&&lastname.valid}" class="form-control" placeholder="First name" required>
+          <div *ngIf="do_f.submitted&&lastname.invalid" class="invalid-feedback">
+            <div *ngIf="lastname.errors.required"> this field is required</div>
+            <div *ngIf="lastname.errors.minlength">lastname can not be less then 4 caracters</div>
+          </div>
         </div>
       </div>
       <div class="col">
         <div class="input-group-prepend">
           <div class="input-group-text">+216</div>
           <div class="form-group">
-          <input type="number" class="form-control"  placeholder="Phone Number">
+            <input required minlength="4" type="text" class="form-control" [(ngModel)]="model.phonenumber" #phonenumber="ngModel" [ngClass]="{'is-invalid':do_f.submitted && phonenumber.invalid,'is-valid':do_f.submitted && phonenumber.valid}" name="phonenumber" placeholder="Phone Number">
+
+            <div *ngIf="do_f.submitted && phonenumber.invalid" class="invalid-feedback" >
+              <div *ngIf="phonenumber.errors.required">this field is required !</div>
+              <div *ngIf="phonenumber.errors.minlength">Phone number can not be less then 4 digits !</div>
+            </div>
           </div>
         </div>
 
@@ -28,7 +40,10 @@
       </div>
       <div class="col">
         <div class="form-group">
-        <input placeholder="Birth Date" class="form-control" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+          <input required placeholder="Birth Date" class="form-control" [(ngModel)]="model.birth_date" #birth_date="ngModel" [ngClass]="{'is-invalid':do_f.submitted && birth_date.invalid, 'is-valid':do_f.submitted && birth_date.valid}" name="birth_date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date">
+          <div class="invalid-feedback">
+            <div >Birth-date is required !</div>
+          </div>
         </div>
       </div>
 
@@ -40,12 +55,20 @@
       <div class="col">
         <div class="form-group">
 
-        <input type="text" class="form-control" placeholder="Address">
+          <input required minlength="8" type="text" class="form-control" [(ngModel)]="model.adress" #adress="ngModel" [ngClass]="{'is-invalid':do_f.submitted && adress.invalid,'is-valid':do_f.submitted && adress.valid}" name="adress" placeholder="Address">
+          <div *ngIf="do_f.submitted&&adress.invalid" class="invalid-feedback">
+            <div *ngIf="adress.errors.required">adress is required !</div>
+            <div *ngIf="adress.errors.minlength">adress must contain at least 8 caracters</div>
+          </div>
         </div>
       </div>
       <div class="col">
         <div class="form-group">
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="E-mail">
+          <input required email type="text" class="form-control" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{'is-invalid':do_f.submitted && email.invalid,'is-valid':do_f.submitted && email.valid}" name="email" placeholder="E-mail">
+          <div *ngIf="do_f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is required !</div>
+            <div *ngIf="email.errors.email">You must be a valid email adress !</div>
+          </div>
         </div>
       </div>
 
@@ -53,19 +76,35 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Insurance company name">
+          <input required minlength="6" type="text" class="form-control" [(ngModel)]="model.badgeID" #badgeid="ngModel" [ngClass]="{'is-invalid':do_f.submitted && badgeid.invalid,'is-valid':do_f.submitted && badgeid.valid}" name="badgeidnumber" placeholder="Badge ID Number">
+
+          <div *ngIf="do_f.submitted && badgeid.invalid" class="invalid-feedback" >
+            <div *ngIf="badgeid.errors.required">this field is required !</div>
+            <div *ngIf="badgeid.errors.minlength">Phone number can not be less then 6 digits !</div>
+          </div>
         </div>
       </div>
       <div class="col">
         <div class="form-group">
-        <input type="number" class="form-control" placeholder="Insurance policy Number">
+          <input required minlength="7" type="password" class="form-control" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{'is-invalid':do_f.submitted && password.invalid ,'is-valid':do_f.submitted && password.valid}" name="password" placeholder="Password">
+          <div *ngIf="do_f.submitted && password.invalid" class="invalid-feedback" >
+            <div *ngIf="password.errors.required">this field is required !</div>
+            <div *ngIf="password.errors.minlength">Password must be at least 7 caracters !</div>
+          </div>
+          <div class="valid-feedback">
+            <div>Do not share your password with any one !</div>
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username">
+          <input required type="text" class="form-control" [(ngModel)]="model.username" #username="ngModel" [ngClass]="{'is-invalid':do_f.submitted && username.invalid ,'is-valid':do_f.submitted && username.valid}" name="username" placeholder="Username">
+          <div  class="invalid-feedback">
+            <div >You must shoose a valid username !</div>
+            <div class="valid-feedback"></div>
+          </div>
         </div>
 
       </div>
@@ -90,7 +129,7 @@
       </div>
 
     </div>
-
+  {{model | json}}
   </form>
 </div>
 </body>

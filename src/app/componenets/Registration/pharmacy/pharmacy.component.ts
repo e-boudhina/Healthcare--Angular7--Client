@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pharmacy.component.css']
 })
 export class PharmacyComponent implements OnInit {
-
+model = {};
   constructor() { }
 
   ngOnInit() {
   }
 
+  onSubmit() {
+    return false;
+  }
 }
